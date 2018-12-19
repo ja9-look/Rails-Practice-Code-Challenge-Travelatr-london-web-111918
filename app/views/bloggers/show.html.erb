@@ -1,0 +1,15 @@
+<h2> <%= @blogger.name %> </h2>
+
+<hr>
+<h4>Total Likes: </h4>
+  <% @total_likes = [] %>
+  <% @blogger.posts.each do |post| %>
+    <% @total_likes << post.likes %>
+  <% end %>
+  <%= @total_likes.reduce (:+) %>
+
+<hr>
+
+<h4>Featured Post: </h4>
+<% @best_post = @blogger.posts.max_by { |post| post.likes } %>
+<%= link_to @best_post.title, post_path(@best_post) %>
